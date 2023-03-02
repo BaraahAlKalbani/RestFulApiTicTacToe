@@ -3,14 +3,8 @@ package com.TicTacToeBot.TicTacToeBot.app.Controller;
 import com.TicTacToeBot.TicTacToeBot.app.Model.Board;
 import com.TicTacToeBot.TicTacToeBot.app.Model.Bot;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.PostMapping;
-
-
-import java.util.ArrayList;
+import com.TicTacToeBot.TicTacToeBot.app.Model.ResponseManager;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * This class represents the AppController, which handles requests for the TicTacToeBot app.
@@ -27,11 +21,12 @@ public class AppController {
      * @throws Exception if the input game board contains invalid characters
      */
     @PostMapping("/bot")
-    public Board getBoard(@RequestBody char[][] grid) throws Exception {
+    public ResponseManager getBoard(@RequestBody char[][] grid) throws Exception {
         try {
             Board board = new Board(grid);
             if (!board.containsInvalidChar()) {
-                return Bot.makeMove(board);
+                ResponseManager responseManager = new ResponseManager(Bot.makeMove(board));
+                return responseManager ;
             }
             System.out.println("\n\t\t\t@@@@@@@@@@@  Invalid Grid !!  @@@@@@@@@@@");
         } catch (Exception e) {

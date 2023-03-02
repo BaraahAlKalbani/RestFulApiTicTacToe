@@ -36,6 +36,23 @@ public class Board {
     setWinner("it's A Draw !!!");
     return true;
   }
+  /**
+   * Checks if the game has ended in a draw by iterating through each cell of the game grid. If any cell
+   * is empty, the game is not a draw and the method returns false. Otherwise, the game is a draw and the
+   * winner is set to "it's A Draw !!!".
+   * @return true if the game is a draw, false otherwise
+   */
+  public boolean checkIfFull() {
+    checkWinner();
+    for (int row = 0; row < grid.length; row++) {
+      for (int col = 0; col < grid[row].length; col++) {
+        if (grid[row][col] == ' ') {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
 
   /**
    * Checks if the board contains any invalid characters.
@@ -108,6 +125,9 @@ public class Board {
   }
   public void setWinner(String winner) {
     this.winner = winner;
+  }
+  public String getWinner() {
+    return winner;
   }
 
 }

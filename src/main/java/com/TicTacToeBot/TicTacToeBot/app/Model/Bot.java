@@ -13,6 +13,11 @@ public class Bot {
         char symbol = board.getBot1Symbol().getSymbol();
         char[][] grid= board.getGrid();
         for (int turn = 0;turn<9;turn++) {
+            if (board.checkIfFull())
+            {
+                System.out.println("\n\t\t\t@@@@@@@@@@@  Board is full !!  @@@@@@@@@@@");
+                return board;
+            }
             // Generate a random row and column index
             Random random = new Random();
             int row = random.nextInt(3);
